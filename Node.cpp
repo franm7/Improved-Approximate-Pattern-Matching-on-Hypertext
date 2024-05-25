@@ -1,5 +1,5 @@
 // added by Adam
-#include "Node.h"
+#include "headers/Node.h"
 
 Node::Node() = default;
 Node::Node(int id, const std::string &sequence) : id{id}, sequence{sequence} {}

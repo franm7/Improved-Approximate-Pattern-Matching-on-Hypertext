@@ -1,11 +1,11 @@
 #include <iostream>
-#include "Node.h"
-#include "Edge.h"
-#include "Graph.h"
+#include "headers/Node.h"
+#include "headers/Edge.h"
+#include "headers/Graph.h"
 
 int main(int argc, char **argv) {
     std::string gfaFilePath = argv[1];
-    std::string fastqFilePath = argv[2];
+    // std::string fastqFilePath = argv[2];
 
     Graph* graph = Graph::loadFromFile(gfaFilePath);
     for (const auto &element : graph->vertices) {

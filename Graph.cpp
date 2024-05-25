@@ -1,7 +1,7 @@
 // added by Adam
 #include <sstream>
 #include <fstream>
-#include "Graph.h"
+#include "headers/Graph.h"
 
 Graph::Graph() {}
 

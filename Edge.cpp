@@ -1,5 +1,5 @@
 // added by Adam
-#include "Edge.h"
+#include "headers/Edge.h"
 
 Edge::Edge(int from, int to, char fromOrient, char toOrient, int overlap)
     : from(from), to(to), fromOrient(fromOrient),
