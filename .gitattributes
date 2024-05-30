@@ -1,0 +1,3 @@
+# Ensure .gfa and .fastq files use LF line endings
+*.gfa text eol=lf
+*.fastq text eol=lf

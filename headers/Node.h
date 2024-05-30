@@ -1,33 +1,41 @@
-// added by Adam
 #ifndef NODE_H
 #define NODE_H
 
-#include <string>
-#include <unordered_set>
-#include "Edge.h"
+#include <vector>
+#include <iostream>
+#include <limits>
 
 class Node {
 public:
-    int id = 0;
-    std::string sequence = "";
-    std::unordered_set<Edge> inEdges;
-    std::unordered_set<Edge> outEdges;
+    // Constructor
+    Node(int id, char letter);
 
-    Node();
-    Node(int id, const std::string &sequence);
+    // Getter for the letter
+    char getLetter() const;
 
-    bool operator==(const Node &rhs) const;
-    bool operator!=(const Node &rhs) const;
+    // Getter for the id
+    int getId() const;
+
+    // Add a predecessor
+    void addPredecessor(Node* predecessor);
+
+    // Get the list of predecessors
+    const std::vector<Node*>& getPredecessors() const;
+
+    // Print node information
+    void printNode() const;
+
+    // Getter for the value
+    int getValue() const;
+
+    // Setter for the value
+    void setValue(int value);
+
+private:
+    int id;
+    char letter;
+    int value;
+    std::vector<Node*> predecessors;
 };
 
-// hash function for Node class
-namespace std {
-    template<>
-    struct hash<Node> {
-        size_t operator()(const Node &x) const {
-            return hash<long>()(x.id);
-        }
-    };
-}
-
-#endif
+#endif // NODE_H
