@@ -17,10 +17,10 @@ public:
     int getId() const;
 
     // Add a predecessor
-    void addPredecessor(Node* predecessor);
+    void addPredecessor(int predecessorId);
 
     // Get the list of predecessors
-    const std::vector<Node*>& getPredecessors() const;
+    const std::vector<int>& getPredecessors() const;
 
     // Print node information
     void printNode() const;
@@ -31,11 +31,16 @@ public:
     // Setter for the value
     void setValue(int value);
 
+    int getPreviousValue() const;
+
+    void setPreviousValue(int value);
+
 private:
     int id;
     char letter;
     int value;
-    std::vector<Node*> predecessors;
+    int previousValue;
+    std::vector<int> predecessorIds;
 };
 
 #endif // NODE_H
