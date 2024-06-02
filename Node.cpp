@@ -1,6 +1,7 @@
 #include "headers/Node.h"
 
-// Constructor
+// Constructors
+Node::Node() {}
 Node::Node(int id, char letter) : id(id), letter(letter) {}
 
 // Getter for the letter
