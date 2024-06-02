@@ -14,25 +14,33 @@ int main(int argc, char* argv[]) {
 
     auto start = std::chrono::high_resolution_clock::now();
     
-    std::vector<Node*> graph = {};
-    std::unordered_map<int, Node*> graphMap;
-    std::tie(graph, graphMap) = loadGfa(gfaFilePath);
+    std::vector<Node*> graph = loadGfa(gfaFilePath);
     std::vector<std::string> sequences = loadFastq(fastqFilePath);
+    // debugging
     int cnt = 0;
+    for (Node* node : graph) {
+        node->printNode();
+        if (cnt > 5) {
+            break;
+        }
+        cnt++;
+    }
+    cnt = 0;
     std::vector<int> results;
     for (std::string& sequence : sequences) {
         // std::cout << "Sequence: " << sequence << std::endl;
-        int result = navarro(graph, graphMap, sequence);
+        int result = navarro(graph, sequence);
         results.push_back(result);
-        // if (cnt > 3) {
-        //     break;
-        // }
-        // cnt++;
-        // std::cout << "Navarro result: " << result << std::endl;
+        std::cout << "Navarro result: " << result << std::endl;
+        // debugging
+        if (cnt > 3) {
+            break;
+        }
+        cnt++;
     }
-    for (size_t i = 0; i < results.size(); ++i) {
-        std::cout << "Sequence " << i + 1 << ": " << results[i] << std::endl;
-    }
+    // for (size_t i = 0; i < results.size(); ++i) {
+    //     std::cout << "Sequence " << i + 1 << ": " << results[i] << std::endl;
+    // }
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
@@ -40,7 +48,7 @@ int main(int argc, char* argv[]) {
 
     for (Node* node : graph) {
             delete node;
-        }
+    }
 
     return 0;
 }

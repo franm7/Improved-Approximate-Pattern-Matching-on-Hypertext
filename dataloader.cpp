@@ -8,7 +8,7 @@
 
 static int nodeId = 0;
 
-void parseSegmentLine(const std::string& line, std::vector<Node*>& graph, std::unordered_map<int, Node*>& graphMap, std::unordered_map<int, std::pair<Node*, Node*>> &sequenceMap) {
+void parseSegmentLine(const std::string& line, std::vector<Node*>& graph, std::unordered_map<int, std::pair<Node*, Node*>> &sequenceMap) {
     std::stringstream ss{line};
     std::string type; // always 'S', don't need it
     int sequenceId;
@@ -21,7 +21,6 @@ void parseSegmentLine(const std::string& line, std::vector<Node*>& graph, std::u
         char letter = *it;
         Node* node = new Node(nodeId, letter);
         graph.push_back(node);
-        graphMap[nodeId] = graph.back();
 
         // first iteration
         if (first_iteration) {
@@ -44,7 +43,7 @@ void parseSegmentLine(const std::string& line, std::vector<Node*>& graph, std::u
 }
 
 
-void parseLinkLine(const std::string& line, std::vector<Node*>& graph, std::unordered_map<int, Node*>& graphMap, std::unordered_map<int, std::pair<Node*, Node*>> &sequenceMap) {
+void parseLinkLine(const std::string& line, std::vector<Node*>& graph, std::unordered_map<int, std::pair<Node*, Node*>> &sequenceMap) {
     std::stringstream ss{line};
     std::string type; // always 'L', don't need it
     int fromSequenceId;
@@ -60,16 +59,15 @@ void parseLinkLine(const std::string& line, std::vector<Node*>& graph, std::unor
     toNode->addPredecessor(fromNode->getId());
 }
 
-std::tuple<std::vector<Node*>, std::unordered_map<int, Node*>> loadGfa(const std::string& fileName) {
+std::vector<Node*> loadGfa(const std::string& fileName) {
     std::vector<Node*> graph = {};
-    std::unordered_map<int, Node*> graphMap;
     std::unordered_map<int, std::pair<Node*, Node*>> sequenceMap; // <sequenceId, pair<firstNode, lastNode>>
     
     std::ifstream file{fileName};
     std::string line;
     while (std::getline(file, line)) {
         if (line[0] == 'S') {
-            parseSegmentLine(line, graph, graphMap, sequenceMap);
+            parseSegmentLine(line, graph, sequenceMap);
         }
     }
 
@@ -85,11 +83,11 @@ std::tuple<std::vector<Node*>, std::unordered_map<int, Node*>> loadGfa(const std
     file.seekg(0, std::ios::beg);
     while (std::getline(file, line)) {
         if (line[0] == 'L') {
-            parseLinkLine(line, graph, graphMap, sequenceMap);
+            parseLinkLine(line, graph, sequenceMap);
         }
     }
 
-    return std::make_tuple(graph, graphMap);
+    return graph;
 }
 
 // Function to load sequence lines from a .fastq file
