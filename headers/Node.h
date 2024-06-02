@@ -7,7 +7,8 @@
 
 class Node {
 public:
-    // Constructor
+    // Constructors
+    Node();
     Node(int id, char letter);
 
     // Getter for the letter
