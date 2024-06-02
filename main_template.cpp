@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
         int result = navarro(graph, sequence);
         results.push_back(result);
         std::cout << "Navarro result: " << result << std::endl;
-        // debugging
+        // debuggingg
         if (cnt > 3) {
             break;
         }
