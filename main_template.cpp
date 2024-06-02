@@ -34,14 +34,11 @@ int main() {
 
     std::vector<Node*> graph = {node1, node2, node3, node4, node5, node6, node7, node8, node9, node10};
 
-    std::unordered_map<int, Node*> graphMap;
-    for (Node* node : graph) {
-        graphMap[node->getId()] = node;
-    }
+
 
     std::string sequence = "ACGTA";
     
-    int result = navarro(graph, graphMap, sequence);
+    int result = navarro(graph, sequence);
 
     std::cout << "Navarro result: " << result << std::endl;
 
@@ -68,11 +65,8 @@ int main() {
     node18->addPredecessor(7);
 
     std::vector<Node*> graph1 = {node11, node12, node13, node14, node15, node16, node17, node18};
-    std::unordered_map<int, Node*> graphMap1;
-    for (Node* node : graph1) {
-        graphMap1[node->getId()] = node;
-    }
-    result = navarro(graph1, graphMap1, "CGAT");
+
+    result = navarro(graph1, "CGAT");
     std::cout << "result: " << result << std::endl;
 
 

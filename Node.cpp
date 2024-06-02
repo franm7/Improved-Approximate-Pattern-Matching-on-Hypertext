@@ -1,7 +1,7 @@
 #include "headers/Node.h"
 
 // Constructor
-Node::Node(int id, char letter) : id(id), letter(letter), value(0), previousValue(0) {}
+Node::Node(int id, char letter) : id(id), letter(letter) {}
 
 // Getter for the letter
 char Node::getLetter() const {
@@ -23,29 +23,10 @@ const std::vector<int>& Node::getPredecessors() const {
     return predecessorIds;
 }
 
-// Getter for the value
-int Node::getValue() const {
-    return value;
-}
-
-// Setter for the value
-void Node::setValue(int value) {
-    this->value = value;
-}
-
-// Getter for the previous value
-int Node::getPreviousValue() const {
-    return previousValue;
-}
-
-// Setter for the previous value
-void Node::setPreviousValue(int value) {
-    this->previousValue = value;
-}
 
 // Print node information
 void Node::printNode() const {
-    std::cout << "Node ID: " << id << ", Letter: " << letter << ", Value: " << value << ", Predecessors: ";
+    std::cout << "Node ID: " << id << ", Letter: " << letter << ", Predecessors: ";
     for (const auto& predId : predecessorIds) {
         std::cout << predId << " ";
     }

@@ -1,7 +1,7 @@
 #include "headers/navarro.h"
 
 // Function definition
-int navarro(const std::vector<Node*>& graph, const std::unordered_map<int, Node*>& graphMap, const std::string& sequence) {
+int navarro(const std::vector<Node*>& graph, const std::string& sequence) {
     int counter = 1;
 
     std::vector<std::vector<int>> matrix(sequence.length() + 1, std::vector<int>(graph.size(), 0));
@@ -113,14 +113,10 @@ int main() {
     node10->addPredecessor(8);
 
     std::vector<Node*> graph = {node1, node2, node3, node4, node5, node6, node7, node8, node9, node10};
-    std::unordered_map<int, Node*> graphMap;
-    for (Node* node : graph) {
-        graphMap[node->getId()] = node;
-    }
 
     std::string sequence = "ACGTA";
 
-    int result = navarro(graph, graphMap, sequence);
+    int result = navarro(graph, sequence);
 
     std::cout << "Navarro result: " << result << std::endl;
 

@@ -25,21 +25,10 @@ public:
     // Print node information
     void printNode() const;
 
-    // Getter for the value
-    int getValue() const;
-
-    // Setter for the value
-    void setValue(int value);
-
-    int getPreviousValue() const;
-
-    void setPreviousValue(int value);
 
 private:
     int id;
     char letter;
-    int value;
-    int previousValue;
     std::vector<int> predecessorIds;
 };
 
