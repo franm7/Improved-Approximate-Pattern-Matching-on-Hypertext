@@ -3,76 +3,85 @@
 // Function definition
 int navarro(const std::vector<Node*>& graph, const std::unordered_map<int, Node*>& graphMap, const std::string& sequence) {
     int counter = 1;
-    for (size_t i = 0; i < sequence.length(); i++){
-        char curr = sequence[i];
-        
+
+    std::vector<std::vector<int>> matrix(sequence.length() + 1, std::vector<int>(graph.size(), 0));
+    
+    for (size_t i = 1; i < sequence.length() + 1; i++){
+        char curr = sequence[i - 1];
+        int j = 0;
         for (Node* node : graph){
             
             int id = node->getId();
             const std::vector<int>& predecessorIds = node->getPredecessors();
             int currValue = std::numeric_limits<int>::max();
-            // ako se znakovi matchaju
+
+            // if the nodes match
             if(curr == node ->getLetter()){
-                // ako ima prethodnika
+
+                // if there are predecessors
                 if (!predecessorIds.empty()){
                     for(int predId : predecessorIds){
-                        Node* predecessor = graphMap.at(predId);
-                        if(predecessor -> getPreviousValue() < currValue){
-                            currValue = predecessor -> getPreviousValue();
+                        int value = matrix[i-1][predId-1];
+                        if(value < currValue){
+                            currValue = value;
                         }
                     }
                 } else {
+                    
                     currValue = counter - 1;
+
                 }
+            // if the nodes do not match
             } else {
                 if (!predecessorIds.empty()){
                     for(int predId: predecessorIds){
-                        Node* predecessor = graphMap.at(predId);
-                        int potentialValue = 1 + predecessor -> getValue();
-                        if(potentialValue < currValue){
-                            currValue = potentialValue;
+                        int value = 1 + matrix[i-1][predId-1];
+                        
+                        if(value < currValue){
+                            currValue = value;
+
                         }
 
-                        potentialValue = 1 + predecessor -> getPreviousValue();
+                        
+                        value = 1 + matrix[i][predId-1];
+                        if(value < currValue){
+                            currValue = value;
 
-                        if(potentialValue < currValue){
-                            currValue = potentialValue;
                         }
                     }
-
-
                 } 
 
-                if(node -> getPreviousValue() + 1 < currValue){
-                    currValue = 1 + node -> getPreviousValue();
+                if(matrix[i - 1][j] < currValue){
+                    currValue = 1 + matrix[i - 1][j];
+
                 }
             }
-
-            node -> setValue(currValue);
+            
+            
+            matrix[i][j] = currValue;
+            ++j;
         }
-        std::cout << "Iteration " << i << std::endl;
-        for (Node* node : graph){
-            node -> setPreviousValue(node -> getValue());
-            std::cout << node -> getValue();
-        }
-
-        std::cout << std::endl;
         ++counter;
 
     }
 
-    int min = std::numeric_limits<int>::max();
 
-    for (Node* node : graph){
-        if(node -> getValue() < min){
-            min = node -> getValue();
+    int min = std::numeric_limits<int>::max();
+    int i = sequence.length();
+    for (size_t j = 0; j <graph.size(); j++){
+        if(matrix[i][j] < min){
+            min = matrix[i][j];
         }
     }
+    
+
+
+    
     
     return min;
 }
 
-
+/*
 int main() {
     // Example usage
     Node* node1 = new Node(1, 'A');
@@ -121,3 +130,4 @@ int main() {
 
     return 0;
 }
+*/

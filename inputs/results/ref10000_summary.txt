@@ -1,0 +1,20 @@
+Linear graph:
+cellbycell took 50651421us
+bitvector took 2392582us
+ratio: 21.1702
+Onechar graph:
+cellbycell took 91569873us
+bitvector took 3670222us
+ratio: 24.9494
+SNP graph:
+cellbycell took 75898921us
+bitvector took 4123805us
+ratio: 18.4051
+Twopath graph:
+cellbycell took 217955048us
+bitvector took 23562135us
+ratio: 9.25022
+Tangle graph:
+cellbycell took 62333015us
+bitvector took 15147818us
+ratio: 4.11498
