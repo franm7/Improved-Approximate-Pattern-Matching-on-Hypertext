@@ -17,3 +17,17 @@ https://academic.oup.com/bioinformatics/article/35/19/3599/5372677%20%C2%A0
 Algorithms need to be compared on the 3 kinds of topologies, as described in chapter 6.2 Graph topology experiment. It need not be compared on topologies that include cycles. Scripts that generate the test data are available at
 
 https://github.com/maickrau/GraphAligner/tree/PaperExperiments/WabiExperimentSnake
+
+## Running the Code
+
+### For Ubuntu
+
+1. Compile the code:
+    ```bash
+    g++ -g -o main main.cpp navarro.cpp Node.cpp dataloader.cpp
+    ```
+
+2. Run the compiled program:
+    ```bash
+    ./main <path_to_gfa> <path_to_fastq>
+    ```
