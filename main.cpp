@@ -16,31 +16,19 @@ int main(int argc, char* argv[]) {
     
     std::vector<Node*> graph = loadGfa(gfaFilePath);
     std::vector<std::string> sequences = loadFastq(fastqFilePath);
-    // debugging
-    int cnt = 0;
-    for (Node* node : graph) {
-        node->printNode();
-        if (cnt > 5) {
-            break;
-        }
-        cnt++;
-    }
-    cnt = 0;
-    std::vector<int> results;
+    std::vector<int> min_edit_distances;
     for (std::string& sequence : sequences) {
         // std::cout << "Sequence: " << sequence << std::endl;
-        int result = navarro(graph, sequence);
-        results.push_back(result);
-        std::cout << "Navarro result: " << result << std::endl;
-        // debuggingg
-        if (cnt > 3) {
-            break;
-        }
-        cnt++;
+        // you can use navarro function if you don't want to backtrack
+        int min_edit_distance = navarro_backtrack(graph, sequence);
+        min_edit_distances.push_back(min_edit_distance);
+        std::cout << "Minimal edit distance: " << min_edit_distance << std::endl;
     }
-    // for (size_t i = 0; i < results.size(); ++i) {
-    //     std::cout << "Sequence " << i + 1 << ": " << results[i] << std::endl;
-    // }
+
+    std::cout << "Minimal distances by sequence:" << std::endl;
+    for (size_t i = 0; i < min_edit_distances.size(); ++i) {
+        std::cout << "Sequence " << i + 1 << ": " << min_edit_distances[i] << std::endl;
+    }
 
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;

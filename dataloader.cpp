@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include "headers/dataloader.h"
 
-static int nodeId = 0;
+static int nodeId = 1;
 
 void parseSegmentLine(const std::string& line, std::vector<Node*>& graph, std::unordered_map<int, std::pair<Node*, Node*>> &sequenceMap) {
     std::stringstream ss{line};
@@ -70,14 +70,6 @@ std::vector<Node*> loadGfa(const std::string& fileName) {
             parseSegmentLine(line, graph, sequenceMap);
         }
     }
-
-    // for (const auto& entry : sequenceMap) {
-    //     int sequenceId = entry.first;
-    //     Node* firstNode = entry.second.first;
-    //     Node* lastNode = entry.second.second;
-    //     std::cout << "Sequence ID: " << sequenceId << ", First Node ID: " << firstNode->getId()
-    //               << ", Last Node ID: " << lastNode->getId() << std::endl;
-    // }
 
     file.clear();
     file.seekg(0, std::ios::beg);
